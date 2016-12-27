@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import time
+import matplotlib.pyplot as plt
 
 def executeTarget(target, count):
     totTime = 0
@@ -13,6 +14,17 @@ def executeTarget(target, count):
         sys.stdout.write('.')
     return totTime
 
+def makeGraph(timeList):
+    x = range(len(timeList))
+    y = timeList
+    plt.plot(x,y)
+    plt.show()
+
+
+
+
+def saveGraphImage(img):
+    print("")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
@@ -24,10 +36,12 @@ if __name__ == "__main__":
     for num in range(measureNumber):
         totTime = executeTarget(target = sys.argv[1], count = int(sys.argv[2]))
         timeList.append(totTime)
-        print("")
-        print("="*30 + "Now %d 'th loop" %(num+1) + "="*30 )
+        #print("")
+        #print("="*30 + "Now %d 'th loop" %(num+1) + "="*30 )
 
     timeList.sort()
-    print(timeList)
+    img = makeGraph(timeList)
+    saveGraphImage(img)
+    #print(timeList)
     #print(len(timeList))
     
